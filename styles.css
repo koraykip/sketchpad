@@ -5,23 +5,28 @@ body {
     font-family: sans-serif;
     margin: 1.25rem;
 }
-h1 { margin: 0.125rem}
-#container {
+
+h1 {
+    margin: 0.125rem;
+}
+
+#gridContainer {
     display: flex;
     flex-wrap: wrap;
     width: 32rem;
     height: 32rem;
+    padding: 0;
     border: 0.125rem solid #000;
 }
 
 .grid-square {
     box-sizing: border-box;
     border: 0.0625rem solid #ddd;
-    width: 2rem;
-    height: 2rem;
 }
 
-#resetBtn {
+
+#resetBtn,
+#setSizeBtn {
     margin: 0.5rem;
     padding: 0.25rem 1rem;
     font-size: 1rem;

@@ -1,59 +1,63 @@
 let isMouseDown = false;
 
-// Track mouse down/up globally
 document.body.addEventListener("mousedown", (e) => {
-    if (e.button === 0) isMouseDown = true; // left button
+  if (e.button === 0) isMouseDown = true;
 });
-
 document.body.addEventListener("mouseup", () => {
-    isMouseDown = false;
+  isMouseDown = false;
 });
-
 
 function createGrid(size = 16) {
-    const container = document.getElementById("container");
-    container.innerHTML = ""; // Clear existing grid if needed
+  const container = document.getElementById("gridContainer");
+  container.innerHTML = "";
 
-    for (let i = 0; i < size * size; i++) {
-        const square = document.createElement("div");
-        square.classList.add("grid-square");
+  const containerSizeRem = 32;
+  const squareSizeRem = containerSizeRem / size;
 
-        //   // Optional: add hover effect
-        //   square.addEventListener("mouseenter", () => {
-        //     square.style.backgroundColor = "black";
-        //   });
-
-        container.appendChild(square);
-    }
+  for (let i = 0; i < size * size; i++) {
+    const square = document.createElement("div");
+    square.classList.add("grid-square");
+    square.style.width = `${squareSizeRem}rem`;
+    square.style.height = `${squareSizeRem}rem`;
+    container.appendChild(square);
+  }
 }
 
 function addHoverEffect() {
-    const squares = document.querySelectorAll(".grid-square");
-  
-    squares.forEach(square => {
-      square.addEventListener("mouseenter", () => {
-        if (isMouseDown) {
-          square.style.backgroundColor = "#333";
-        }
-      });
-  
-      // Optional: allow single-click painting too
-      square.addEventListener("mousedown", (e) => {
-        if (e.button === 0) {
-          square.style.backgroundColor = "#333";
-        }
-      });
-    });
-  }
+  const squares = document.querySelectorAll(".grid-square");
 
-function resetGrid() {
-    createGrid();     // recreate grid
-    addHoverEffect(); // reapply hover logic
+  squares.forEach(square => {
+    square.addEventListener("mouseenter", () => {
+      if (isMouseDown) {
+        square.style.backgroundColor = "#333";
+      }
+    });
+
+    square.addEventListener("mousedown", (e) => {
+      if (e.button === 0) {
+        square.style.backgroundColor = "#333";
+      }
+    });
+  });
 }
 
-createGrid(); // Default 16x16 grid
-addHoverEffect();
+function resetGrid(size = 16) {
+  createGrid(size);
+  addHoverEffect();
+}
 
-// Reset button logic
-const resetBtn = document.getElementById("resetBtn");
-resetBtn.addEventListener("click", resetGrid);
+document.getElementById("resetBtn").addEventListener("click", () => resetGrid());
+
+document.getElementById("setSizeBtn").addEventListener("click", () => {
+  const input = prompt("Enter grid size (1–100):");
+  const size = parseInt(input);
+
+  if (isNaN(size) || size < 1 || size > 100) {
+    alert("Please enter a number between 1 and 100.");
+    return;
+  }
+
+  resetGrid(size);
+});
+
+resetGrid();
