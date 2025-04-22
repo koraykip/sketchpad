@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    margin: 1.25rem;
+}
+h1 { margin: 0.125rem}
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 32rem;
+    height: 32rem;
+    border: 0.125rem solid #000;
+}
+
+.grid-square {
+    box-sizing: border-box;
+    border: 0.0625rem solid #ddd;
+    width: 2rem;
+    height: 2rem;
+}
+
+#resetBtn {
+    margin: 0.5rem;
+    padding: 0.25rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.manual {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0.5rem;
+    padding: 0;
+}
